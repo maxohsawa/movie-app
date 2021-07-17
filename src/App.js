@@ -4,6 +4,7 @@ import React from 'react';
 import {useState} from 'react';
 import {useEffect} from 'react';
 import MovieInfo from './MovieInfo';
+import axios from 'axios';
 
 function App() {
 
@@ -20,9 +21,16 @@ function App() {
     query.searchURL.length > 0 &&
     (async () => {
       try {
-        const response = await fetch(query.searchURL);
-        const data = await response.json();
-        await setMovie({...movie, ...data});
+
+        /* fetch */
+        // const response = await fetch(query.searchURL);
+        // const data = await response.json();
+        // await setMovie({...movie, ...data});
+
+        /* axios */
+        const response = await axios.get(query.searchURL);
+        await setMovie({...movie, ...response.data});
+        
         await setQuery({...query, searchURL: '', title: ''});
       }
       catch (errors){
