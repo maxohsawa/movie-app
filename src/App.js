@@ -3,6 +3,7 @@ import './App.css';
 import React from 'react';
 import {useState} from 'react';
 import {useEffect} from 'react';
+import MovieInfo from './MovieInfo';
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
       try {
         const response = await fetch(query.searchURL);
         const data = await response.json();
-        setMovie(...movie, ...data);
+        await setMovie({...movie, ...data});
+        await setQuery({...query, searchURL: '', title: ''});
       }
       catch (errors){
         console.log(errors);
@@ -58,6 +60,7 @@ function App() {
           onSubmit={handleSubmit}
         />
       </form>
+      {Object.keys(movie).length > 0 && <MovieInfo movie={movie} />}
     </div>
   );
 }
