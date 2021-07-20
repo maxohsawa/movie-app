@@ -9,6 +9,7 @@ function MovieInfo(props){
             <img src={props.movie.Poster} alt={props.movie.Title} />
             <h3>{props.movie.Title}</h3>
             <h4>{props.movie.Year}</h4>
+            <p>{props.movie.Plot}</p>
         </div>
     );
 };
